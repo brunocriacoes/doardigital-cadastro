@@ -262,3 +262,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.alert {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    background-color: #f1c40f;
+    text-align: center;
+    border-radius: 5px;
+}
