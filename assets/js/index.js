@@ -37,7 +37,7 @@ async function cadastrar() {
     if( validarPass( getDados() ).length > 0 ) return onError( validarPass( getDados() ) )
     let register = await SuperRegisterAdmin(getDados())
     if( register.status ) return onError( register.message )
-    window.location.href = `http://padrao.doardigital.com.br/painel/#/cadastrado-sucesso/${register.token.access_token}`
+    window.location.href = `http://padrao.doardigital.com.br/painel/#/cadastrado-sucesso/${register.token.access_token}/${register.admin.id}/${register.admin.nome}/1`
     
 }
 
