@@ -270,3 +270,17 @@ a:hover {
     text-align: center;
     border-radius: 5px;
 }
+.body-termo {
+    background-image: none;
+    background-color: #EEE;
+}
+.termos-header {
+    background-color: var(--azul);
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 30px;
+}
+.termos-header img {
+    display: inline-block;
+    height: 40px;
+}
