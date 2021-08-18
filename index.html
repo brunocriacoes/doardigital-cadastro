@@ -55,8 +55,7 @@
                 </div>
                 <div class="col s12 m12 l6">
                     <div class="space"></div>
-                    <form action="javascript:void(0)" name="formulario" onsubmit="globalThis.cadastrar()" class="form">
-                        <input value="" oninput="globalThis.mask_cpf_cnpj(this)" type="text" name="cpf_cnpj" placeholder="CPF/CNPJ" required>
+                    <form action="javascript:void(0)" autocomplete="off" name="formulario" onsubmit="globalThis.cadastrar()" class="form">
                         <input value="" type="text" name="name" placeholder="Nome" required>
                         <input value="" type="email" name="email" placeholder="Email" required>
                         <input value="" oninput="globalThis.maskTel(this)" type="text" name="phone" placeholder="Telefone" required>
