@@ -7,12 +7,19 @@ function getDados() {
         telefone: form.phone.value.replace(/\D/gi, ''),
         password: form.password.value,
         password_confirm: form.password_confirm.value,
-        ativo: false,
-        instituicao_id: null,
-        credencial: null,
-        vendendor_id: null
+        ativo: true,
+        instituicao_id: 0,
+        credencial: 15,
+        vendendor_id: null,
+        anotacao: btoa(
+            JSON.stringify({
+                notification: {
+                    email: form.notification_email.checked,
+                    sms: form.notification_sms.checked
+                }
+            })
+        )
     }
-
 }
 
 function validarPass(data) {
@@ -101,7 +108,7 @@ async function SuperRegisterAdmin(dados) {
 
 async function SendWhatsapp(tel) {
     let format_tel = '55'
-    format_tel += valida_telefone(tel) 
+    format_tel += valida_telefone(tel)
     let form = {
         sender: 'digitalcombo',
         number: format_tel,
@@ -116,20 +123,19 @@ async function SendWhatsapp(tel) {
         method: 'POST',
         mode: 'no-cors',
         cache: 'default',
-        body:  obj_to_url( form ) 
+        body: obj_to_url(form)
     }
     return await fetch(base, options)
 }
 
-function valida_telefone($telefone)
-{
-    $telefone = $telefone.replace(/\D/, ""); 
-    $ddd = $telefone.substr( 0, 2); 
+function valida_telefone($telefone) {
+    $telefone = $telefone.replace(/\D/, "");
+    $ddd = $telefone.substr(0, 2);
     if ($ddd === "11" || $ddd === "12" || $ddd === "13" || $ddd === "14" || $ddd === "15" || $ddd === "16" || $ddd === "17" || $ddd === "18" || $ddd === "19" || $ddd === "21" || $ddd === "22" || $ddd === "24") {
         $telefone = $telefone;
     } else {
-        $telefone = $telefone.substr(-8); 
-        $telefone = $ddd + $telefone; 
+        $telefone = $telefone.substr(-8);
+        $telefone = $ddd + $telefone;
         $telefone = $telefone;
     }
     return $telefone;
