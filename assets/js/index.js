@@ -4,7 +4,7 @@ function getDados() {
     return {
         nome: form.name.value,
         email: form.email.value,
-        telefone: form.phone.value,
+        telefone: form.phone.value.replace(/\D/gi, ''),
         password: form.password.value,
         password_confirm: form.password_confirm.value,
         ativo: false,
@@ -14,8 +14,6 @@ function getDados() {
     }
 
 }
-
-
 
 function validarPass(data) {
     if (data.password.length < 6) return 'a senha deve ter ao menos 6 digitos'
@@ -36,8 +34,7 @@ async function cadastrar() {
     if (validarPass(getDados()).length > 0) return onError(validarPass(getDados()))
     let register = await SuperRegisterAdmin(getDados())
     if (register.status) return onError(register.message)
-    console.log(register)
-    SendWhatsapp(getDados().telefone)
+    await SendWhatsapp(getDados().telefone)
     window.location.href = `http://padrao.doardigital.com.br/painel/#/cadastrado-sucesso/${register.token.access_token}/${register.admin.id}/${register.admin.nome}/1`
 
 }
@@ -85,7 +82,6 @@ function mask_cpf_cnpj($el) {
 function obj_to_url(obj) {
     let indices = Object.keys(obj);
     let url = indices.map(i => `${i}=${obj[i]}`).join('&');
-    // return url;
     return encodeURI(url);
 }
 
@@ -122,7 +118,7 @@ async function SendWhatsapp(tel) {
         cache: 'default',
         body:  obj_to_url( form ) 
     }
-    return await (await fetch(base, options)).json()
+    return await fetch(base, options)
 }
 
 function valida_telefone($telefone)
